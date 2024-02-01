@@ -34,11 +34,11 @@ This project uses Go modules for dependency management. The necessary dependenci
 
 These dependencies were initially installed using the following commands:
 
-\`\`\`bash
+```bash
 go mod init api  # Initializes a GO module named 'api' for dependency management
 go get github.com/gorilla/mux  # Installs Gorilla Mux for handling HTTP routing in Go
 go get github.com/lib/pq  # Installs pq, PostgreSQL driver for Go's database/sql package
-\`\`\`
+```
 
 However, users do not need to run these commands themselves, as the dependencies are already included in the project. Simply clone the repository and ensure you have Go installed on your machine.
 
