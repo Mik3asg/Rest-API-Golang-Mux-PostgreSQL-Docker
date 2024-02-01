@@ -97,7 +97,7 @@ docker ps  # Check the status of running Docker containers for go-db and go-app
 
 ## Test API endpoints
 
-Once the application is running, you can access it in your web browser at `http://localhost:8080` . We will use Postman as an API Platform to test our API endpoints. 
+Once the application is running, you can access it in your web browser at `http://localhost:8000` . We will use Postman as an API Platform to test our API endpoints. 
 
 In addition, we can use a PostgreSQL client to check the data being stored in the database for each endpoint. Please refer to your database credentials defined in your `.env` file.
 
