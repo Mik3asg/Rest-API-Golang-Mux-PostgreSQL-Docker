@@ -41,7 +41,6 @@ go get github.com/lib/pq  # Installs pq, PostgreSQL driver for Go's database/sql
 ```
 
 However, users do not need to run these commands themselves, as the dependencies are already included in the project. Simply clone the repository and ensure you have Go installed on your machine.
-
 If you're not familiar with Go modules, you can learn more about them [here](https://blog.golang.org/using-go-modules).
 
 3. **Ensure Docker Engine is running:**
