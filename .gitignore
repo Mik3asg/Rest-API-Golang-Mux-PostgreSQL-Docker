@@ -1,0 +1,20 @@
+# Ignore compiled binaries and executables
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Ignore vendor directory if using dep or go modules
+/vendor/
+
+# Ignore environment file
+.env
+
+# Ignore Docker related files
+.dockerignore
+
+# Ignore log files
+*.log
+
+# Ignore macOS system files
+.DS_Store
