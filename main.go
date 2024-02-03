@@ -81,6 +81,9 @@ func getUsers(db *sql.DB) http.HandlerFunc {
 }
 
 
+
+
+
 // Function to get user by id
 func getUser(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -118,7 +121,7 @@ func createUser(db *sql.DB) http.HandlerFunc {
 }
 
 
-// Function to update an user
+// Function to update an user based on id 
 func updateUser(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var u User
@@ -127,9 +130,20 @@ func updateUser(db *sql.DB) http.HandlerFunc {
 		vars := mux.Vars(r)
 		id := vars["id"]
 
-		_, err := db.Exec("UPDATE users SET name = $1, email = $2, city = $3 WHERE id = $4", u.Name, u.Email, u.City, id)
+		var existingUser User
+		err := db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&existingUser.ID, &existingUser.Name, &existingUser.Email, &existingUser.City)
 		if err != nil {
-			log.Fatal(err)
+			w.WriteHeader(http.StatusNotFound)
+			w.Write([]byte("User not found. Please ensure you have entered a valid ID."))
+			return
+		}
+
+		_, err = db.Exec("UPDATE users SET name = $1, email = $2, city = $3 WHERE id = $4", u.Name, u.Email, u.City, id)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte("Internal server error"))
+			log.Println("Error updating user in database:", err)
+			return
 		}
 
 		json.NewEncoder(w).Encode(u)

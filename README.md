@@ -64,10 +64,6 @@ To configure authentication for the PostgreSQL database used in this project, yo
 3. Save the `.env` file in the same directory as your `docker-compose.yml`file, and Docker Compose will automatically read these environment variables when you run `docker-compose up`.
 
 
-
-
-
-
 These environment variables will be read by Docker Compose and used to authenticate your application with the PostgreSQL database.
 
 ## Start the PostgreSQL Database Container 
@@ -97,17 +93,39 @@ docker ps  # Check the status of running Docker containers for go-db and go-app
 
 ## Test API endpoints
 
-Once the application is running, you can access it in your web browser at `http://localhost:8000` . We will use Postman as an API Platform to test our API endpoints. 
+Once the application is running, you can access it in your web browser at `http://localhost:8000/users`. Since we are testing our Go API locally, you need to use the Postman Desktop Agent.
 
 In addition, we can use a PostgreSQL client to check the data being stored in the database for each endpoint. Please refer to your database credentials defined in your `.env` file.
 
-### Create User with POST 
+### Creating a User via POST Request
 
 - Endpoint: `POST localhost:8000/users`
 
-- To create a new user, send a POST request to `localhost:8000/users` with a JSON body containing the user details.
+- To create a new user, make a POST request to `localhost:8000/users` with a JSON body containing the user details, as shown below:
 
-- Use a PostgreSQL client to verify the new user data was inserted into the database.
+```json
+{
+    "name": "YourDesiredName",
+    "email": "your.email@example.com",
+    "city": "YourCity"
+}
+```
+- After the creation, the output should resemble the following JSON object:
+
+```json
+{
+    "id": 1,
+    "name": "yourdesiredname",
+    "email": "your.email@example.com",
+    "city": "YourCity"
+}
+```
+- Take note that an "id" of 1 will be returned.
+
+- Repeat this process for creating additional users, one at a time.
+
+- Utilize a PostgreSQL client to confirm that the new user data has been successfully inserted into the database.
+
 
 ### GET All Users
 
